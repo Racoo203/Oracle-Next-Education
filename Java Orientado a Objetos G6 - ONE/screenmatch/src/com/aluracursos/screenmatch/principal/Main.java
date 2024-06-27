@@ -1,26 +1,19 @@
 package com.aluracursos.screenmatch.principal;
 
-import com.aluracursos.screenmatch.modelos.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class Main {
-    public static void main(String[] args) {
-        Pelicula favorita = new Pelicula("El señor de los anillos", 2001);
-        favorita.evalua(10);
+    public static void main(String[] args) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://www.omdbapi.com/?t=matrix&apikey=9a52772e")).build();
 
-        Pelicula otra = new Pelicula("John Wick", 2014);
-        otra.evalua(9);
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        Serie serie = new Serie("La Casa de Papel", 2017);
-
-        ArrayList<Titulo> lista = new ArrayList<>();
-        lista.add(favorita);
-        lista.add(otra);
-        lista.add(serie);
-
-        Collections.sort(lista);
-        System.out.println(lista);
+        System.out.println(response.body());
     }
 }
