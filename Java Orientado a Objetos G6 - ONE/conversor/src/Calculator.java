@@ -11,11 +11,7 @@ public class Calculator {
         this.currencyMap = currencyMap;
     }
 
-    public HashMap<String, Double> getCurrencyMap() {
-        return currencyMap;
-    }
-
-    public double convert(double usd, String currency) {
-        return usd * currencyMap.get(currency);
+    public double convert(double amount, String toCurrency) {
+        return amount * currencyMap.get(toCurrency);
     }
 }

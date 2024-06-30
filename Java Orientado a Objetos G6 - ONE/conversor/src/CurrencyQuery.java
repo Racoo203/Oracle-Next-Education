@@ -6,20 +6,18 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class CurrencyQuery {
-    public Calculator queryAPI() {
+    public Calculator queryAPI(String fromCurrency) {
         final String clave = "c6c3c6079b0311f485af96cd";
-        final String fromCurrency = "USD";
         String url = "https://v6.exchangerate-api.com/v6/" + clave + "/latest/" + fromCurrency;
-
-        URI direcion = URI.create(url);
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(direcion).build();
 
         try {
 
+            URI direccion = URI.create(url);
+
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder().uri(direccion).build();
+
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//            System.out.println(response.body());
             return new Gson().fromJson(response.body(), Calculator.class);
 
         } catch (Exception e) {
