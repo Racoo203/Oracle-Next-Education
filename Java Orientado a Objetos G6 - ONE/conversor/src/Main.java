@@ -5,7 +5,9 @@ public class Main {
         boolean isLooping = true;
 
         CurrencyQuery currencyQuery = new CurrencyQuery();
-        currencyQuery.queryAPI();
+        Calculator calculator = currencyQuery.queryAPI();
+        double mto = calculator.convert(1, "BRL");
+        System.out.println(mto);
 
 //        while (isLooping) {
 //            System.out.println("-----------------------------------");
