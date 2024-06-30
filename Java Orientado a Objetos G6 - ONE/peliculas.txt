@@ -1,0 +1,1 @@
+nombre='Beetlejuice', fechaDeLanzamiento=1988, duracion=92

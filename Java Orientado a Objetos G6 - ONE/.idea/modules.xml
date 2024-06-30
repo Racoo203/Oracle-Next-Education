@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Init/Init.iml" filepath="$PROJECT_DIR$/Init/Init.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Java Orientado a Objetos G6 - ONE.iml" filepath="$PROJECT_DIR$/.idea/Java Orientado a Objetos G6 - ONE.iml" />
       <module fileurl="file://$PROJECT_DIR$/Proyecto/Proyecto.iml" filepath="$PROJECT_DIR$/Proyecto/Proyecto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/conversor/conversor.iml" filepath="$PROJECT_DIR$/conversor/conversor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-desafio-3/java-desafio-3.iml" filepath="$PROJECT_DIR$/java-desafio-3/java-desafio-3.iml" />
       <module fileurl="file://$PROJECT_DIR$/radioalura/radioalura.iml" filepath="$PROJECT_DIR$/radioalura/radioalura.iml" />
       <module fileurl="file://$PROJECT_DIR$/screenmatch/screenmatch.iml" filepath="$PROJECT_DIR$/screenmatch/screenmatch.iml" />
     </modules>
