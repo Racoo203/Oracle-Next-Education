@@ -17,7 +17,7 @@ public class Main {
             String seleccion = "";
             double amount = -1;
 
-//            System.out.println(fromCurrency + toCurrency + seleccion + String.valueOf(amount));
+            //            System.out.println(fromCurrency + toCurrency + seleccion + String.valueOf(amount));
 
             System.out.println("-----------------------------------");
             System.out.println("Conversor de Monedas");
@@ -106,16 +106,20 @@ public class Main {
             }
 
             if (!(isSkip | isEnd)) {
-                currentTransaction ++;
+                try {
+                    System.out.println("Ingresa el monto de la moneda desde la cual se quiere convertir.");
+                    amount = Integer.parseInt(scanner.nextLine());
 
-                System.out.println("Ingresa el monto de la moneda desde la cual se quiere convertir.");
-                amount = Integer.parseInt(scanner.nextLine());
-                CurrencyQuery currencyQuery = new CurrencyQuery();
-                Calculator calculator = currencyQuery.queryAPI(fromCurrency);
-                double mto = calculator.convert(amount, toCurrency);
-                String output = String.format("%s : %f === %s : %f", fromCurrency, amount, toCurrency, mto);
-                System.out.println(currentTransaction + ") " + output);
-                convertionHistory.add(output);
+                    CurrencyQuery currencyQuery = new CurrencyQuery();
+                    Calculator calculator = currencyQuery.queryAPI(fromCurrency);
+                    double mto = calculator.convert(amount, toCurrency);
+                    currentTransaction++;
+                    String output = String.format("%s : %f === %s : %f", fromCurrency, amount, toCurrency, mto);
+                    System.out.println(currentTransaction + ") " + output);
+                    convertionHistory.add(output);
+                } catch (Exception e) {
+                    System.out.println("Error al capturar dato, intenta nuevamente.");
+                }
             }
 
             isSkip = false;
