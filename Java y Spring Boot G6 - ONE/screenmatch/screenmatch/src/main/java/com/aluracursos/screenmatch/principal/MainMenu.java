@@ -1,6 +1,7 @@
 package com.aluracursos.screenmatch.principal;
 
 import com.aluracursos.screenmatch.models.*;
+import com.aluracursos.screenmatch.repository.SerieRepository;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConversorDatos;
 
@@ -16,11 +17,17 @@ public class MainMenu {
     private ConversorDatos conversorDatos = new ConversorDatos();
 
     private final String URL_BASE = "https://www.omdbapi.com/";
-    private final String API_KEY = "&apikey=9a52772e";
+    private final String API_KEY = "&apikey=" + System.getenv("OMDB-APIKEY");
 
     private List<DatosSerie> datosSeries = new ArrayList<>();
+    private SerieRepository repository;
+
+    public MainMenu(SerieRepository repository) {
+        this.repository = repository;
+    }
 
     public void mostrarMenu() {
+
         // BUSCAR DATOS GENERALES DE LA SERIE
         int opcion = -1;
 
@@ -60,10 +67,7 @@ public class MainMenu {
     }
 
     private void mostrarHistorialSeries() {
-        List<Serie> series = new ArrayList<>();
-        series = datosSeries.stream()
-                .map(datosSerie -> new Serie(datosSerie))
-                .collect(Collectors.toList());
+        List<Serie> series = repository.findAll();
 
 
         series.stream()
@@ -106,7 +110,10 @@ public class MainMenu {
     private void buscarSerieWeb() {
 
         DatosSerie datosSerie = getDatosSerie();
-        datosSeries.add(datosSerie);
+//        datosSeries.add(datosSerie);
+
+        Serie serie = new Serie(datosSerie);
+        repository.save(serie);
         System.out.println(datosSerie);
 
     }
