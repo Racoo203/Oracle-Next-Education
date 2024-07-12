@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="screenmatch" />
-        <module name="screenmatch (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="desafio" target="21" />
+      <module name="screenmatch (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

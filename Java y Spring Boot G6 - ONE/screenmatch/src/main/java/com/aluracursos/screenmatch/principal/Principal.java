@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class Principal {
     private Scanner teclado = new Scanner(System.in);
     private ConsumoAPI consumoApi = new ConsumoAPI();
-    private final String URL_BASE = "https://www.omdbapi.com/?t=";
-    private final String API_KEY = "TU-APIKEY-OMDB";
+    private final String URL_BASE = "https://www.omdbapi.com/";
+    private final String API_KEY = "&apikey=" + System.getenv("OMDB-APIKEY");
     private ConvierteDatos conversor = new ConvierteDatos();
     private List<DatosSerie> datosSeries = new ArrayList<>();
     private SerieRepository repositorio;
@@ -27,7 +27,7 @@ public class Principal {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """
-                    1 - Buscar series 
+                    1 - Buscar series
                     2 - Buscar episodios
                     3 - Mostrar series buscadas
                     4 - Buscar series por titulo
@@ -40,8 +40,7 @@ public class Principal {
                     0 - Salir
                     """;
             System.out.println(menu);
-            opcion = teclado.nextInt();
-            teclado.nextLine();
+            opcion = Integer.parseInt(teclado.nextLine());
 
             switch (opcion) {
                 case 1:
@@ -84,11 +83,13 @@ public class Principal {
     private DatosSerie getDatosSerie() {
         System.out.println("Escribe el nombre de la serie que deseas buscar");
         var nombreSerie = teclado.nextLine();
-        var json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+") + API_KEY);
+        var json = consumoApi.obtenerDatos(URL_BASE + "?t=" + nombreSerie.replace(" ", "+") + API_KEY);
         System.out.println(json);
         DatosSerie datos = conversor.obtenerDatos(json, DatosSerie.class);
         return datos;
+        // LA QUERY FUNCIONA, AQUI NO ESTA EL PROBLEMA
     }
+
     private void buscarEpisodioPorSerie() {
         mostrarSeriesBuscadas();
         System.out.println("Escribe el nombre de la serie de la cual quieres ver los episodios");
@@ -103,7 +104,7 @@ public class Principal {
             List<DatosTemporadas> temporadas = new ArrayList<>();
 
             for (int i = 1; i <= serieEncontrada.getTotalTemporadas(); i++) {
-                var json = consumoApi.obtenerDatos(URL_BASE + serieEncontrada.getTitulo().replace(" ", "+") + "&season=" + i + API_KEY);
+                var json = consumoApi.obtenerDatos(URL_BASE + "?t=" + serieEncontrada.getTitulo().replace(" ", "+") + "&season=" + i + API_KEY);
                 DatosTemporadas datosTemporada = conversor.obtenerDatos(json, DatosTemporadas.class);
                 temporadas.add(datosTemporada);
             }
@@ -125,7 +126,7 @@ public class Principal {
         DatosSerie datos = getDatosSerie();
         Serie serie = new Serie(datos);
         repositorio.save(serie);
-        //datosSeries.add(datos);
+        System.out.println("4");
         System.out.println(datos);
     }
 
