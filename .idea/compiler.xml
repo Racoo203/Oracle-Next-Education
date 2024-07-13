@@ -6,17 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="screenmatch" />
+        <module name="literalura" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="desafio" target="21" />
+      <module name="screenmatch" target="21" />
       <module name="screenmatch (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="desafio" options="-parameters" />
+      <module name="literalura" options="-parameters" />
       <module name="screenmatch" options="-parameters" />
       <module name="screenmatch (1)" options="-parameters" />
     </option>
